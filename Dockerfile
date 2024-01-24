@@ -1,13 +1,11 @@
-FROM python:3.10.6
-LABEL creator="yokon" email="944682328@qq.com"
+FROM python:3.11
 
-WORKDIR /app
+WORKDIR /mdt/run
 
 COPY . .
 RUN pip install --upgrade pip \
     && pip install -i https://pypi.douban.com/simple/ -r requirements.txt \
     && chmod +x entrypoint.sh
 
-ENTRYPOINT ["bash", "entrypoint.sh"]
-EXPOSE 8062
-CMD ["http"]
+ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0"]
+EXPOSE 8000
