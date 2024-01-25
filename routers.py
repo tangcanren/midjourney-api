@@ -2,7 +2,7 @@ from fastapi import APIRouter, Body, HTTPException, UploadFile
 
 from handler import prompt_handler, unique_id
 from lib.api import discord
-from lib.api.callback import RESULT_TABLE
+from lib.api import RESULT_TABLE
 from lib.api.discord import TriggerType
 from schema import (
     QueueReleaseIn,

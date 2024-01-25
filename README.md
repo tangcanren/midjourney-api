@@ -4,5 +4,5 @@ This is a work to combine the origin [midjourney-api](https://github.com/yokonsa
 
 ## start the server
 ```bash
-GUILD_ID=1087327011124564008 CHANNEL_ID=1087327011124564010 USER_TOKEN=MTA4NzMyMjU1MzEyMDQ2OTA1NQ.GjwAFa.Ga7f28Nas4sZ40UXst-o__qPWHKk-Qim1iPtAM BOT_TOKEN=MTE5ODgzMTgwODA3MTA5NDQxMw.GQ_OhX.yziUCDceMc1AjJwzNj30HTQjkL9HaoEEPiEF8o uvicorn app:app
+GUILD_ID= CHANNEL_ID= USER_TOKEN= BOT_TOKEN= uvicorn app:app
 ```

@@ -2,10 +2,12 @@ import re
 from typing import Any, Dict, Union
 
 from discord import Message
+from loguru import logger
 
 from handler import PROMPT_PREFIX, PROMPT_SUFFIX
-from lib.api.callback import callback, queue_release
+from lib.api import RESULT_TABLE
 from task.bot._typing import Attachment, CallbackData, Embed
+from util._queue import taskqueue
 
 TRIGGER_ID_PATTERN = f"{PROMPT_PREFIX}(\w+?){PROMPT_SUFFIX}"  # 消息 ID 正则
 
@@ -21,11 +23,9 @@ def set_temp(trigger_id: str):
 
 
 def pop_temp(trigger_id: str):
-  queue_release(trigger_id)
-  try:
-    TEMP_MAP.pop(trigger_id)
-  except KeyError:
-    pass
+  taskqueue.pop(trigger_id)
+  TEMP_MAP.pop(trigger_id, None)
+  logger.debug(f"queue_release: {trigger_id}")
 
 
 def match_trigger_id(content: str) -> Union[str, None]:
@@ -35,18 +35,19 @@ def match_trigger_id(content: str) -> Union[str, None]:
 
 async def callback_trigger(trigger_id: str, trigger_status: str,
                            message: Message):
-  callback(
-      CallbackData(
-          type=trigger_status,
-          id=message.id,
-          content=message.content,
-          attachments=[
-              Attachment(**attachment.to_dict())
-              for attachment in message.attachments
-          ],
-          embeds=[],
-          trigger_id=trigger_id,
-      ))
+  data = CallbackData(
+      type=trigger_status,
+      id=message.id,
+      content=message.content,
+      attachments=[
+          Attachment(**attachment.to_dict())
+          for attachment in message.attachments
+      ],
+      embeds=[],
+      trigger_id=trigger_id,
+  )
+  RESULT_TABLE[trigger_id]
+  logger.debug(f"callback data: {data}")
 
 
 async def callback_describe(trigger_status: str, message: Message,
@@ -54,13 +55,12 @@ async def callback_describe(trigger_status: str, message: Message,
   url = embed.get("image", {}).get("url")
   trigger_id = url.split("/")[-1].split(".")[0]
 
-  callback(
-      CallbackData(
-          type=trigger_status,
-          id=message.id,
-          content=message.content,
-          attachments=[],
-          embeds=[Embed(**embed)],
-          trigger_id=trigger_id,
-      ))
+  RESULT_TABLE[trigger_id] = CallbackData(
+      type=trigger_status,
+      id=message.id,
+      content=message.content,
+      attachments=[],
+      embeds=[Embed(**embed)],
+      trigger_id=trigger_id,
+  )
   return trigger_id

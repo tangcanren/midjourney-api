@@ -15,7 +15,6 @@ uvicorn = "0.22.0"
 pydantic = "^2.5.3"
 aiohttp = ">=3.8.4,<3.9.0"
 loguru = "0.7.0"
-aiofiles = "23.1.0"
 python-multipart = "0.0.6"
 
 
