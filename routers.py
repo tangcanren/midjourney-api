@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Body, HTTPException, UploadFile
 
 from handler import prompt_handler, unique_id
-from lib.api import discord
-from lib.api import RESULT_TABLE
+from lib.api import RESULT_TABLE, discord
 from lib.api.discord import TriggerType
 from schema import (
     QueueReleaseIn,
@@ -104,7 +103,7 @@ async def queue_release(body: QueueReleaseIn):
   return body
 
 
-@router.post("/queue/polling", response_model=TriggerResponse)
+@router.post("/queue/polling")
 async def queue_polling(body: QueueReleaseIn):
   """bot 消息获取"""
   if body.trigger_id not in RESULT_TABLE:

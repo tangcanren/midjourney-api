@@ -46,7 +46,7 @@ async def callback_trigger(trigger_id: str, trigger_status: str,
       embeds=[],
       trigger_id=trigger_id,
   )
-  RESULT_TABLE[trigger_id]
+  RESULT_TABLE[trigger_id] = data
   logger.debug(f"callback data: {data}")
 
 
