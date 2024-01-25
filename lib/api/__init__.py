@@ -1,7 +1,7 @@
 from collections import defaultdict
 from os import getenv
 
-from exceptions import MissRequiredVariableError
+from lib.exceptions import MissRequiredVariableError
 
 GUILD_ID = getenv("GUILD_ID")
 CHANNEL_ID = getenv("CHANNEL_ID")

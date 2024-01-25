@@ -5,7 +5,7 @@ from typing import Any, Callable, Deque, Dict, List, ParamSpec
 
 from loguru import logger
 
-from exceptions import QueueFullError
+from lib.exceptions import QueueFullError
 
 P = ParamSpec("P")
 

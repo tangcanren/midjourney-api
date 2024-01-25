@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Body, HTTPException, UploadFile
 
-from handler import prompt_handler, unique_id
+from lib.handler import prompt_handler, unique_id
 from lib.api import RESULT_TABLE, discord
 from lib.api.discord import TriggerType
-from schema import (
+from lib.schema import (
     QueueReleaseIn,
     SendMessageIn,
     SendMessageResponse,

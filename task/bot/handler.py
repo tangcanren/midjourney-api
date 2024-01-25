@@ -4,7 +4,7 @@ from typing import Any, Dict, Union
 from discord import Message
 from loguru import logger
 
-from handler import PROMPT_PREFIX, PROMPT_SUFFIX
+from lib.handler import PROMPT_PREFIX, PROMPT_SUFFIX
 from lib.api import RESULT_TABLE
 from task.bot._typing import Attachment, CallbackData, Embed
 from util._queue import taskqueue

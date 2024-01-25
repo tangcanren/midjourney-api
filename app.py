@@ -6,8 +6,8 @@ from fastapi import FastAPI, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-import routers
-from exceptions import APPBaseException, ErrorCode, MissRequiredVariableError
+import lib.routers as routers
+from lib.exceptions import APPBaseException, ErrorCode, MissRequiredVariableError
 from task.bot.listener import bot
 
 BOT_TOKEN = getenv("BOT_TOKEN")
