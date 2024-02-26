@@ -32,4 +32,4 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: kunyu/midjourney-api:1.0
+        tags: qiyuanqwe/kunyu/midjourney-api:1.0
