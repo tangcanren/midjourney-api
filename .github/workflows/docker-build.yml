@@ -8,9 +8,11 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ linux/amd64, linux/arm/v8 ]
     steps:
     -
         name: Check out the repo
@@ -32,4 +34,15 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
+        platforms: ${{ matrix.platform }}
         tags: qiyuanqwe/midjourney-api:1.0
+
+    -
+      name: Create and push manifest
+      run: |
+        docker manifest create user/qiyuanqwe/midjourney-api:1.0 \
+          --amend user/qiyuanqwe/midjourney-api:1.0-amd64 \
+          --amend user/qiyuanqwe/midjourney-api:1.0-armv8
+        docker manifest push qiyuanqwe/midjourney-api:1.0
+      env:
+        DOCKER_CLI_EXPERIMENTAL: enabled
