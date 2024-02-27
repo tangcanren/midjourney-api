@@ -40,9 +40,9 @@ jobs:
     -
       name: Create and push manifest
       run: |
-        docker manifest create user/qiyuanqwe/midjourney-api:1.0 \
-          --amend user/qiyuanqwe/midjourney-api:1.0-amd64 \
-          --amend user/qiyuanqwe/midjourney-api:1.0-armv8
+        docker manifest create qiyuanqwe/midjourney-api:1.0 \
+          --amend qiyuanqwe/midjourney-api:1.0-amd64 \
+          --amend qiyuanqwe/midjourney-api:1.0-armv8
         docker manifest push qiyuanqwe/midjourney-api:1.0
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
