@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ linux/amd64, linux/arm/v7 ]
+        platform: [ linux/amd64, linux/arm64/v8 ]
     steps:
     -
         name: Check out the repo
@@ -37,6 +37,10 @@ jobs:
         platforms: ${{ matrix.platform }}
         tags: qiyuanqwe/midjourney-api:1.0
 
+  manifest:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     -
       name: Create and push manifest
       run: |
