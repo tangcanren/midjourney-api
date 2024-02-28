@@ -40,7 +40,7 @@ jobs:
       with:
         push: true
         platforms: ${{ matrix.platform }}
-        tags: qiyuanqwe/midjourney-api:${{env.IMAGE_TAG}},${{ env.IMAGE_NAME }}:latest
+        tags: qiyuanqwe/midjourney-api:${{env.IMAGE_TAG}},qiyuanqwe/midjourney-api:latest
         #tags: qiyuanqwe/midjourney-api:1.0-${{ matrix.platform == 'linux/amd64' && 'amd64' || 'arm64v8' }}
 
 #  manifest:
