@@ -35,18 +35,19 @@ jobs:
       with:
         push: true
         platforms: ${{ matrix.platform }}
-        tags: qiyuanqwe/midjourney-api:1.0-${{ matrix.platform == 'linux/amd64' && 'amd64' || 'arm64v8' }}
+        tags: qiyuanqwe/midjourney-api:1.0
+        #tags: qiyuanqwe/midjourney-api:1.0-${{ matrix.platform == 'linux/amd64' && 'amd64' || 'arm64v8' }}
 
-  manifest:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    -
-      name: Create and push manifest
-      run: |
-        docker manifest create qiyuanqwe/midjourney-api:1.0 \
-          --amend qiyuanqwe/midjourney-api:1.0-amd64 \
-          --amend qiyuanqwe/midjourney-api:1.0-arm64v8
-        docker manifest push qiyuanqwe/midjourney-api:1.0
-      env:
-        DOCKER_CLI_EXPERIMENTAL: enabled
+#  manifest:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#    -
+#      name: Create and push manifest
+#      run: |
+#        docker manifest create qiyuanqwe/midjourney-api:1.0 \
+#          --amend qiyuanqwe/midjourney-api:1.0-amd64 \
+#          --amend qiyuanqwe/midjourney-api:1.0-arm64v8
+#        docker manifest push qiyuanqwe/midjourney-api:1.0
+#      env:
+#        DOCKER_CLI_EXPERIMENTAL: enabled
