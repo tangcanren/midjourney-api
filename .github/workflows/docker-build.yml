@@ -2,9 +2,15 @@ name: Docker Build CI
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
-
+  push:
+    branches:
+      - 'master'
+      - 'releases/**'
+    tags:
+      - 'v*'
+    pull_request:
+      branches:
+        - 'master'
 env:
   REGISTRY_IMAGE: qiyuanqwe/midjourney-api
 
